@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Voltooid
+namespace Voltooid.Models
 {
     using System;
     using System.Data.Entity;

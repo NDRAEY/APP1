@@ -67,38 +67,38 @@
     <Compile Include="View\AddParticipiantWindow.xaml.cs">
       <DependentUpon>AddParticipiantWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Conferences.cs">
+    <Compile Include="Models\Conferences.cs">
       <DependentUpon>ScientistsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Contributions.cs">
+    <Compile Include="Models\Contributions.cs">
       <DependentUpon>ScientistsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MD5.cs" />
-    <Compile Include="Roles.cs">
+    <Compile Include="Models\Roles.cs">
       <DependentUpon>ScientistsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ScientistsModel.Context.cs">
+    <Compile Include="Models\ScientistsModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ScientistsModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ScientistsModel.cs">
+    <Compile Include="Models\ScientistsModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ScientistsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ScientistsModel.Designer.cs">
+    <Compile Include="Models\ScientistsModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ScientistsModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Stage.cs">
+    <Compile Include="Models\Stage.cs">
       <DependentUpon>ScientistsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="SystemUsers.cs">
+    <Compile Include="Models\SystemUsers.cs">
       <DependentUpon>ScientistsModel.tt</DependentUpon>
     </Compile>
     <Page Include="View\AddParticipiantWindow.xaml">
@@ -149,11 +149,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <EntityDeploy Include="ScientistsModel.edmx">
+    <EntityDeploy Include="Models\ScientistsModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ScientistsModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ScientistsModel.edmx.diagram">
+    <None Include="Models\ScientistsModel.edmx.diagram">
       <DependentUpon>ScientistsModel.edmx</DependentUpon>
     </None>
   </ItemGroup>
@@ -167,12 +167,12 @@
     <Resource Include="res\close.png" />
     <Resource Include="res\maximize.png" />
     <Resource Include="res\minimize.png" />
-    <Content Include="ScientistsModel.Context.tt">
+    <Content Include="Models\ScientistsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ScientistsModel.edmx</DependentUpon>
       <LastGenOutput>ScientistsModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="ScientistsModel.tt">
+    <Content Include="Models\ScientistsModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ScientistsModel.edmx</DependentUpon>
       <LastGenOutput>ScientistsModel.cs</LastGenOutput>

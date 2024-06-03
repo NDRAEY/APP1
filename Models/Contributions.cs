@@ -7,23 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Voltooid
+namespace Voltooid.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Roles
+    public partial class Contributions
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Roles()
-        {
-            this.SystemUsers = new HashSet<SystemUsers>();
-        }
-    
         public int Id { get; set; }
-        public string Name { get; set; }
+        public Nullable<int> TabelId { get; set; }
+        public Nullable<int> ConferenceId { get; set; }
+        public string Topic { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SystemUsers> SystemUsers { get; set; }
+        public virtual Conferences Conferences { get; set; }
+        public virtual SystemUsers SystemUsers { get; set; }
     }
 }

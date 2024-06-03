@@ -7,15 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Voltooid
+namespace Voltooid.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Stage
+    public partial class Roles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Stage()
+        public Roles()
         {
             this.SystemUsers = new HashSet<SystemUsers>();
         }
