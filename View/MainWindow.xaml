@@ -27,15 +27,15 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <!-- Свернуть окно -->
                 <Button Style="{StaticResource TaskbarIcon}" x:Name="minimize_btn" Click="Minimize_btn_OnClick">
-                    <Image Style="{StaticResource TaskbarIconImage}" Source="res/minimize.png"></Image>
+                    <Image Style="{StaticResource TaskbarIconImage}" Source="../res/minimize.png"></Image>
                 </Button>
                 <!-- Развернуть окно -->
                 <Button Style="{StaticResource TaskbarIcon}" x:Name="maximize_btn" Click="Maximize_btn_OnClick">
-                    <Image Style="{StaticResource TaskbarIconImage}" Source="res/maximize.png"></Image>
+                    <Image Style="{StaticResource TaskbarIconImage}" Source="../res/maximize.png"></Image>
                 </Button>
                 <!-- Закрыть окно -->
                 <Button Style="{StaticResource TaskbarIcon}" x:Name="close_btn" Click="Close_btn_OnClick">
-                    <Image Style="{StaticResource TaskbarIconImage}" Source="res/close.png"></Image>
+                    <Image Style="{StaticResource TaskbarIconImage}" Source="../res/close.png"></Image>
                 </Button>
             </StackPanel>
 
