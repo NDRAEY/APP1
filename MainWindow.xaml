@@ -1,0 +1,94 @@
+﻿<Window x:Class="Voltooid.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Voltooid"
+        mc:Ignorable="d"
+        Title="Главное окно" Height="450" Width="1000"
+        WindowStyle="None" MouseDown="Window_MouseDown"
+        Style="{StaticResource Window}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style TargetType="ListView">
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+        </Grid.Resources>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <!-- Свернуть окно -->
+                <Button Style="{StaticResource TaskbarIcon}" x:Name="minimize_btn" Click="Minimize_btn_OnClick">
+                    <Image Style="{StaticResource TaskbarIconImage}" Source="res/minimize.png"></Image>
+                </Button>
+                <!-- Развернуть окно -->
+                <Button Style="{StaticResource TaskbarIcon}" x:Name="maximize_btn" Click="Maximize_btn_OnClick">
+                    <Image Style="{StaticResource TaskbarIconImage}" Source="res/maximize.png"></Image>
+                </Button>
+                <!-- Закрыть окно -->
+                <Button Style="{StaticResource TaskbarIcon}" x:Name="close_btn" Click="Close_btn_OnClick">
+                    <Image Style="{StaticResource TaskbarIconImage}" Source="res/close.png"></Image>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Label FontSize="14" Margin="5,0,0,0" Content="{Binding Path=Title, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
+            </StackPanel>
+        </Grid>
+
+        <Button x:Name="AddButton" Style="{StaticResource AddButton}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Click="AddButton_OnClick">Добавить участника</Button>
+        <GroupBox Header="Популярные учёные" Grid.Column="0" Grid.Row="2">
+            <ListView x:Name="list_scientists" ItemsSource="{Binding ListPerson}">
+                <ListView.View>
+                    <GridView>
+                        <GridView.Columns>
+                            <GridViewColumn DisplayMemberBinding="{Binding Surname}" Header="Фамилия"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Имя" Width="90"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Patronymic}" Header="Отчество" Width="120"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Count}" Header="Количество статей" Width="150"/>
+                        </GridView.Columns>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </GroupBox>
+        <GroupBox Header="Конференции" Grid.Column="1" Grid.Row="2">
+            <StackPanel>
+                <ComboBox x:Name="current_scientist" Margin="0,0,0, 5" SelectionChanged="Current_scientist_OnSelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} {1} {2}">
+                                        <Binding Path="Surname"></Binding>
+                                        <Binding Path="Name"></Binding>
+                                        <Binding Path="Patronymic"></Binding>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <ListView x:Name="list_filtered" ItemsSource="{Binding ListPerson}">
+                    <ListView.View>
+                        <GridView>
+                            <GridView.Columns>
+                                <GridViewColumn DisplayMemberBinding="{Binding Date}" Header="Дата" Width="120"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Place}" Header="Место" Width="80"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Название" Width="75"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Topic}" Header="Тема доклада" Width="175"/>
+                            </GridView.Columns>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>

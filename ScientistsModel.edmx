@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PS1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Conferences">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Place" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Contributions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TabelId" Type="int" />
+          <Property Name="ConferenceId" Type="int" />
+          <Property Name="Topic" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Stage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SystemUsers">
+          <Key>
+            <PropertyRef Name="TabelId" />
+          </Key>
+          <Property Name="TabelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Patronymic" Type="nvarchar(max)" />
+          <Property Name="Country" Type="nvarchar(max)" />
+          <Property Name="Stage" Type="int" />
+          <Property Name="Login" Type="nvarchar(max)" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="Role" Type="int" />
+        </EntityType>
+        <Association Name="FK__Contribut__Confe__4222D4EF">
+          <End Role="Conferences" Type="Self.Conferences" Multiplicity="0..1" />
+          <End Role="Contributions" Type="Self.Contributions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conferences">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contributions">
+              <PropertyRef Name="ConferenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contribut__Tabel__412EB0B6">
+          <End Role="SystemUsers" Type="Self.SystemUsers" Multiplicity="0..1" />
+          <End Role="Contributions" Type="Self.Contributions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUsers">
+              <PropertyRef Name="TabelId" />
+            </Principal>
+            <Dependent Role="Contributions">
+              <PropertyRef Name="TabelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SystemUse__Stage__3B75D760">
+          <End Role="Stage" Type="Self.Stage" Multiplicity="0..1" />
+          <End Role="SystemUsers" Type="Self.SystemUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SystemUsers">
+              <PropertyRef Name="Stage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SystemUser__Role__3C69FB99">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="SystemUsers" Type="Self.SystemUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SystemUsers">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PS1ModelStoreContainer">
+          <EntitySet Name="Conferences" EntityType="Self.Conferences" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contributions" EntityType="Self.Contributions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stage" EntityType="Self.Stage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemUsers" EntityType="Self.SystemUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Contribut__Confe__4222D4EF" Association="Self.FK__Contribut__Confe__4222D4EF">
+            <End Role="Conferences" EntitySet="Conferences" />
+            <End Role="Contributions" EntitySet="Contributions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contribut__Tabel__412EB0B6" Association="Self.FK__Contribut__Tabel__412EB0B6">
+            <End Role="SystemUsers" EntitySet="SystemUsers" />
+            <End Role="Contributions" EntitySet="Contributions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SystemUse__Stage__3B75D760" Association="Self.FK__SystemUse__Stage__3B75D760">
+            <End Role="Stage" EntitySet="Stage" />
+            <End Role="SystemUsers" EntitySet="SystemUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SystemUser__Role__3C69FB99" Association="Self.FK__SystemUser__Role__3C69FB99">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="SystemUsers" EntitySet="SystemUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PS1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Conferences">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Place" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contributions" Relationship="Self.FK__Contribut__Confe__4222D4EF" FromRole="Conferences" ToRole="Contributions" />
+        </EntityType>
+        <EntityType Name="Contributions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TabelId" Type="Int32" />
+          <Property Name="ConferenceId" Type="Int32" />
+          <Property Name="Topic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Conferences" Relationship="Self.FK__Contribut__Confe__4222D4EF" FromRole="Contributions" ToRole="Conferences" />
+          <NavigationProperty Name="SystemUsers" Relationship="Self.FK__Contribut__Tabel__412EB0B6" FromRole="Contributions" ToRole="SystemUsers" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SystemUsers" Relationship="Self.FK__SystemUser__Role__3C69FB99" FromRole="Roles" ToRole="SystemUsers" />
+        </EntityType>
+        <EntityType Name="Stage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SystemUsers" Relationship="Self.FK__SystemUse__Stage__3B75D760" FromRole="Stage" ToRole="SystemUsers" />
+        </EntityType>
+        <EntityType Name="SystemUsers">
+          <Key>
+            <PropertyRef Name="TabelId" />
+          </Key>
+          <Property Name="TabelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Stage" Type="Int32" />
+          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="Int32" />
+          <NavigationProperty Name="Contributions" Relationship="Self.FK__Contribut__Tabel__412EB0B6" FromRole="SystemUsers" ToRole="Contributions" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__SystemUser__Role__3C69FB99" FromRole="SystemUsers" ToRole="Roles" />
+          <NavigationProperty Name="Stage1" Relationship="Self.FK__SystemUse__Stage__3B75D760" FromRole="SystemUsers" ToRole="Stage" />
+        </EntityType>
+        <Association Name="FK__Contribut__Confe__4222D4EF">
+          <End Role="Conferences" Type="Self.Conferences" Multiplicity="0..1" />
+          <End Role="Contributions" Type="Self.Contributions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conferences">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contributions">
+              <PropertyRef Name="ConferenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contribut__Tabel__412EB0B6">
+          <End Role="SystemUsers" Type="Self.SystemUsers" Multiplicity="0..1" />
+          <End Role="Contributions" Type="Self.Contributions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUsers">
+              <PropertyRef Name="TabelId" />
+            </Principal>
+            <Dependent Role="Contributions">
+              <PropertyRef Name="TabelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SystemUser__Role__3C69FB99">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="SystemUsers" Type="Self.SystemUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SystemUsers">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SystemUse__Stage__3B75D760">
+          <End Role="Stage" Type="Self.Stage" Multiplicity="0..1" />
+          <End Role="SystemUsers" Type="Self.SystemUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SystemUsers">
+              <PropertyRef Name="Stage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ScientistsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Conferences" EntityType="Self.Conferences" />
+          <EntitySet Name="Contributions" EntityType="Self.Contributions" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Stage" EntityType="Self.Stage" />
+          <EntitySet Name="SystemUsers" EntityType="Self.SystemUsers" />
+          <AssociationSet Name="FK__Contribut__Confe__4222D4EF" Association="Self.FK__Contribut__Confe__4222D4EF">
+            <End Role="Conferences" EntitySet="Conferences" />
+            <End Role="Contributions" EntitySet="Contributions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contribut__Tabel__412EB0B6" Association="Self.FK__Contribut__Tabel__412EB0B6">
+            <End Role="SystemUsers" EntitySet="SystemUsers" />
+            <End Role="Contributions" EntitySet="Contributions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SystemUser__Role__3C69FB99" Association="Self.FK__SystemUser__Role__3C69FB99">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="SystemUsers" EntitySet="SystemUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SystemUse__Stage__3B75D760" Association="Self.FK__SystemUse__Stage__3B75D760">
+            <End Role="Stage" EntitySet="Stage" />
+            <End Role="SystemUsers" EntitySet="SystemUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PS1ModelStoreContainer" CdmEntityContainer="ScientistsEntities">
+          <EntitySetMapping Name="Conferences">
+            <EntityTypeMapping TypeName="PS1Model.Conferences">
+              <MappingFragment StoreEntitySet="Conferences">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contributions">
+            <EntityTypeMapping TypeName="PS1Model.Contributions">
+              <MappingFragment StoreEntitySet="Contributions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TabelId" ColumnName="TabelId" />
+                <ScalarProperty Name="ConferenceId" ColumnName="ConferenceId" />
+                <ScalarProperty Name="Topic" ColumnName="Topic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="PS1Model.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stage">
+            <EntityTypeMapping TypeName="PS1Model.Stage">
+              <MappingFragment StoreEntitySet="Stage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemUsers">
+            <EntityTypeMapping TypeName="PS1Model.SystemUsers">
+              <MappingFragment StoreEntitySet="SystemUsers">
+                <ScalarProperty Name="TabelId" ColumnName="TabelId" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Stage" ColumnName="Stage" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
