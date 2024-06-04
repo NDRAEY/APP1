@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Voltooid"
         mc:Ignorable="d"
         Title="Главное окно" Height="450" Width="1000"
-        WindowStyle="None" MouseDown="Window_MouseDown"
+        MouseDown="Window_MouseDown"
+        ResizeMode="CanResizeWithGrip"
         Style="{StaticResource Window}">
     <Grid>
         <Grid.RowDefinitions>
@@ -16,6 +17,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.Resources>
@@ -23,7 +25,8 @@
                 <Setter Property="Background" Value="Transparent"/>
             </Style>
         </Grid.Resources>
-        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+        
+        <Grid Grid.Row="0" Grid.ColumnSpan="3">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <!-- Свернуть окно -->
                 <Button Style="{StaticResource TaskbarIcon}" x:Name="minimize_btn" Click="Minimize_btn_OnClick">
@@ -44,13 +47,21 @@
             </StackPanel>
         </Grid>
 
-        <Button x:Name="AddButton" Style="{StaticResource AddButton}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Click="AddButton_OnClick">Добавить участника</Button>
-        <GroupBox Header="Популярные учёные" Grid.Column="0" Grid.Row="2">
+        <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <!--<Button x:Name="EditButton" Style="{StaticResource AddButton}" Click="EditButton_OnClick" IsEnabled="False" Grid.Column="1">Редактировать</Button>-->
+            <Button x:Name="AddButton" Style="{StaticResource AddButton}" Click="AddButton_OnClick" Grid.Column="0">Добавить участника</Button>
+        </Grid>
+
+        <GroupBox Header="Популярные учёные" Grid.Column="0" Grid.Row="2" Margin="1">
             <ListView x:Name="list_scientists" ItemsSource="{Binding ListPerson}">
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
-                            <GridViewColumn DisplayMemberBinding="{Binding Surname}" Header="Фамилия"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Surname}" Header="Фамилия" Width="100"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Имя" Width="90"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Patronymic}" Header="Отчество" Width="120"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Count}" Header="Количество статей" Width="150"/>
@@ -59,7 +70,16 @@
                 </ListView.View>
             </ListView>
         </GroupBox>
-        <GroupBox Header="Конференции" Grid.Column="1" Grid.Row="2">
+        <GridSplitter Grid.Column="1"
+                      Grid.Row="2"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Stretch"
+              Background="Gray" 
+              ShowsPreview="True"
+              Width="2"
+                      Margin="2"
+           />
+        <GroupBox Header="Конференции" Grid.Column="2" Grid.Row="2" Margin="1">
             <StackPanel>
                 <ComboBox x:Name="current_scientist" Margin="0,0,0, 5" SelectionChanged="Current_scientist_OnSelectionChanged">
                     <ComboBox.ItemTemplate>
@@ -80,9 +100,9 @@
                     <ListView.View>
                         <GridView>
                             <GridView.Columns>
-                                <GridViewColumn DisplayMemberBinding="{Binding Date}" Header="Дата" Width="120"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Date}" Header="Дата" Width="110"/>
                                 <GridViewColumn DisplayMemberBinding="{Binding Place}" Header="Место" Width="80"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Название" Width="75"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Название" Width="95"/>
                                 <GridViewColumn DisplayMemberBinding="{Binding Topic}" Header="Тема доклада" Width="175"/>
                             </GridView.Columns>
                         </GridView>

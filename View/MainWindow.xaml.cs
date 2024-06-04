@@ -34,6 +34,11 @@ namespace Voltooid
             current_scientist.SelectedValuePath = "TabelId";
 
             UpdateList();
+
+            if(this_user.Role == 3)
+            {
+                AddButton.Visibility = Visibility.Collapsed;
+            }
         }
 
         void UpdateList()

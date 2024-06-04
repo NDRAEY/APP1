@@ -47,11 +47,18 @@ namespace Voltooid
             string patronymic = this.patronymicbox.Text;
             string country = this.countrybox.Text;
             string password = this.passwordbox.Password;
+            string password_again = this.password_again_box.Password;
             string login = usernamebox.Text;
 
             if (surname == "" || name == "" || login == "" || patronymic == "" || country == "" || password == "" || stagebox.SelectedItem == null)
             {
                 MessageBox.Show("Заполните все поля");
+                return;
+            }
+
+            if(password != password_again)
+            {
+                MessageBox.Show("Пароли не совпадают");
                 return;
             }
 
@@ -78,7 +85,7 @@ namespace Voltooid
 
                 Close();
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("Error");
             }
@@ -115,6 +122,5 @@ namespace Voltooid
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
-
     }
 }
