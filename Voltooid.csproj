@@ -64,8 +64,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BaseWindow.cs" />
-    <Compile Include="DBManager.cs" />
+    <Compile Include="Management\BaseWindow.cs" />
+    <Compile Include="Management\DBManager.cs" />
     <Compile Include="View\AddParticipiantWindow.xaml.cs">
       <DependentUpon>AddParticipiantWindow.xaml</DependentUpon>
     </Compile>
@@ -78,7 +78,7 @@
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MD5.cs" />
+    <Compile Include="Tools\MD5.cs" />
     <Compile Include="Models\Roles.cs">
       <DependentUpon>ScientistsModel.tt</DependentUpon>
     </Compile>
