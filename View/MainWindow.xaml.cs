@@ -20,8 +20,6 @@ namespace Voltooid
     /// </summary>
     public partial class MainWindow : Window
     {
-        ScientistsEntities sc = new ScientistsEntities();
-
         private SystemUsers this_user;
 
         public MainWindow(SystemUsers usr)
@@ -30,22 +28,22 @@ namespace Voltooid
 
             this_user = usr;
 
-            current_scientist.ItemsSource = sc.SystemUsers.ToList();
-            current_scientist.SelectedValuePath = "TabelId";
-
-            UpdateList();
-
-            if(this_user.Role == 3)
+            if(usr.Role == 3)
             {
                 AddButton.Visibility = Visibility.Collapsed;
             }
+
+            current_scientist.ItemsSource = DBManager.GetContext().SystemUsers.ToList();
+            current_scientist.SelectedValuePath = "TabelId";
+
+            UpdateList();
         }
 
         void UpdateList()
         {
-            var confs = from user in sc.SystemUsers
+            var confs = from user in DBManager.GetContext().SystemUsers
                 where user.Role == 3
-                join con in sc.Contributions
+                join con in DBManager.GetContext().Contributions
                     on user.TabelId equals con.TabelId into g
                 select new
                 {
@@ -62,12 +60,12 @@ namespace Voltooid
         {
             int id = (int)current_scientist.SelectedValue;
 
-            var confs = from user in sc.SystemUsers
+            var confs = from user in DBManager.GetContext().SystemUsers
                 where user.TabelId == id
-                join con in sc.Contributions
+                join con in DBManager.GetContext().Contributions
                     on user.TabelId equals con.TabelId into w
                 from contribution in w
-                join conf in sc.Conferences
+                join conf in DBManager.GetContext().Conferences
                     on contribution.ConferenceId equals conf.Id into z
                 from conference in z
                 select new
@@ -120,6 +118,5 @@ namespace Voltooid
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
-
     }
 }

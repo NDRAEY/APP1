@@ -24,15 +24,13 @@ namespace Voltooid
 
     public partial class AddParticipiantWindow : Window
     {
-        ScientistsEntities entities = new ScientistsEntities();
-
         public AddParticipiantWindow()
         {
             InitializeComponent();
 
             List<string> strings = new List<string>();
 
-            foreach (var item in entities.Stage)
+            foreach (var item in DBManager.GetContext().Stage)
             {
                 strings.Add(item.Name);
             }
@@ -62,7 +60,7 @@ namespace Voltooid
                 return;
             }
 
-            var stage = entities.Stage.Where((x) => x.Name == this.stagebox.SelectedItem.ToString()).FirstOrDefault();
+            var stage = DBManager.GetContext().Stage.Where((x) => x.Name == this.stagebox.SelectedItem.ToString()).FirstOrDefault();
 
 
             SystemUsers participant = new SystemUsers();
@@ -78,8 +76,8 @@ namespace Voltooid
 
             try
             {
-                entities.SystemUsers.Add(participant);
-                entities.SaveChanges();
+                DBManager.GetContext().SystemUsers.Add(participant);
+                DBManager.GetContext().SaveChanges();
 
                 MessageBox.Show("Okay");
 

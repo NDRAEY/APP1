@@ -22,7 +22,6 @@ namespace Voltooid
     /// </summary>
     public partial class AuthorizationWindow : Window
     {
-        ScientistsEntities db = new ScientistsEntities();
         public AuthorizationWindow()
         {
             InitializeComponent();
@@ -36,7 +35,7 @@ namespace Voltooid
             string hash = MD5.MD5Hash(passwd);
 
 
-            var rq = db.SystemUsers.Where(u => u.Login == login && u.PasswordHash == hash);
+            var rq = DBManager.GetContext().SystemUsers.Where(u => u.Login == login && u.PasswordHash == hash);
 
             if (!rq.Any())
             {
