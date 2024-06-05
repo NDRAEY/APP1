@@ -20,7 +20,7 @@ namespace Voltooid
     /// <summary>
     /// Interaction logic for AuthorizationWindow.xaml
     /// </summary>
-    public partial class AuthorizationWindow : Window
+    public partial class AuthorizationWindow : BaseWindow
     {
         public AuthorizationWindow()
         {
@@ -50,38 +50,5 @@ namespace Voltooid
             Close();
             mw.Show();
         }
-
-        //Вызывается при нажатии на кнопку сворачивания окна
-        private void Minimize_btn_OnClick(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
-        //Вызывается при нажатии на кнопку расширения окна
-        private void Maximize_btn_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (WindowState == WindowState.Maximized)
-            {
-                WindowState = WindowState.Normal;
-            }
-            else
-            {
-                WindowState = WindowState.Maximized;
-            }
-        }
-
-        //Вызывается при нажатии на кнопку закрытия окна
-        private void Close_btn_OnClick(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        //Вызывается при нажатии на окно
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                DragMove();
-        }
-
     }
 }

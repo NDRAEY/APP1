@@ -22,7 +22,7 @@ namespace Voltooid
     /// </summary>
     ///
 
-    public partial class AddParticipiantWindow : Window
+    public partial class AddParticipiantWindow : BaseWindow
     {
         public AddParticipiantWindow()
         {
@@ -79,46 +79,12 @@ namespace Voltooid
                 DBManager.GetContext().SystemUsers.Add(participant);
                 DBManager.GetContext().SaveChanges();
 
-                MessageBox.Show("Okay");
-
                 Close();
             }
             catch
             {
-                MessageBox.Show("Error");
+                MessageBox.Show("Ошибка при создании участника", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        //Вызывается при нажатии на кнопку сворачивания окна
-        private void Minimize_btn_OnClick(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
-        //Вызывается при нажатии на кнопку расширения окна
-        private void Maximize_btn_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (WindowState == WindowState.Maximized)
-            {
-                WindowState = WindowState.Normal;
-            }
-            else
-            {
-                WindowState = WindowState.Maximized;
-            }
-        }
-
-        //Вызывается при нажатии на кнопку закрытия окна
-        private void Close_btn_OnClick(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        //Вызывается при нажатии на окно
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                DragMove();
         }
     }
 }
